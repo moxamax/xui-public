@@ -15,8 +15,12 @@ Reference hashes 只證明複本與安裝套件一致，不證明文件語意正
 
 ## React 19 的頂層 import
 
-配對 beta.131 在 React 19 型別與完整 library typecheck 下，頂層 import 會引入
-`@dnd-kit/core` 的全域 `JSX` 型別錯誤，即使 consumer 只使用 Button。
+觸發條件：React 19 的型別檢查出現 `@dnd-kit/core` 的全域 `JSX` 錯誤
+（例如 `Cannot find namespace 'JSX'`）。
+
+適用配對：xui release 指定的 `@qijenchen/design-system@0.1.0-beta.131`，
+搭配 React 19 型別並執行完整 library typecheck。此配對的頂層 import 會引入上述
+錯誤，即使 consumer 只使用 Button。其他配對須先核對實際安裝套件，不直接套用本修法。
 遇到此情況，改用 package exports 支援的 `components/Button`、`components/Tooltip`
 等元件子路徑，再執行 consumer typecheck；保留原有檢查設定。
 

@@ -1,14 +1,10 @@
 {
   "name": "xui",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "type": "module",
   "bin": {
     "xui": "./bin/xui.mjs"
-  },
-  "scripts": {
-    "test": "node --test",
-    "test:release": "node scripts/smoke-release.mjs"
   },
   "xuiRelease": {
     "designSystem": {
@@ -18,9 +14,6 @@
   },
   "dependencies": {
     "semver": "7.8.5"
-  },
-  "devDependencies": {
-    "eslint": "9.39.5"
   },
   "peerDependencies": {
     "eslint": "^9.0.0"

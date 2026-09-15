@@ -2,6 +2,8 @@
 
 本 runbook 是第一次安裝 xui 的 canonical agent 流程。使用者只提供 consumer 專案與
 xui 來源 URL；版本選擇、Git SHA、命令與設定都由 agent 處理。
+官方來源為 https://github.com/moxamax/xui-public.git。先從來源 repo 讀取本流程；
+無法讀取就停止。完成以下唯讀前置檢查後才可安裝。
 
 ## 1. 唯讀前置檢查
 
@@ -25,7 +27,7 @@ xui 來源 URL；版本選擇、Git SHA、命令與設定都由 agent 處理。
 
 1. 查詢來源 repo 的遠端 tags，只接受完整 SemVer tag（可有前置 `v`）。不得把
    `main`、branch、alias 或非 SemVer tag 當成 release。
-2. 使用者未指定版本時選最新 SemVer；有指定時只接受實際存在的完整版本。同一
+2. 使用者未指定版本時選最新 SemVer（包含先行版）；有指定時只接受實際存在的完整版本。同一
    SemVer 對應多個 tag 或 commit 時停止並回報歧義。
 3. annotated tag 取 `refs/tags/<tag>^{}` 的 peeled commit；lightweight tag 取 tag ref
    本身。結果必須是該 repo 內實際存在的 40 位 commit SHA，不得使用 tag object SHA。
@@ -74,6 +76,10 @@ node ./node_modules/xui/bin/xui.mjs init
 node ./node_modules/xui/bin/xui.mjs status --json
 node ./node_modules/xui/bin/xui.mjs check
 ```
+
+安裝後確認 `node_modules/xui/doc/reference/upstream-guidance.md` 存在，且產生的
+`.agents/skills/xui/SKILL.md` 連結可讀到該檔。型別檢查遇到 React 19 的
+`@dnd-kit/core`／`JSX` 錯誤時，先讀 [上游資料判準](../reference/upstream-guidance.md#react-19-的頂層-import)，依適用配對處理再重跑。
 
 `localPair` 必須為 `valid`。反覆診斷、修正並重跑 `check`，直到 Guard 與 consumer
 `npm run typecheck` 全綠；不建立 baseline 或 suppression。之後另外執行 consumer 原有的相關

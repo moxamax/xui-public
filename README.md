@@ -4,12 +4,13 @@ xui 是安裝在 React／TypeScript／Tailwind CSS 4 專案裡的 AI agent 消�
 
 ## 交給 Agent 安裝
 
-先用 Codex 或 Claude Code 開啟要導入 xui 的專案根目錄，再貼上：
+目前支援 macOS。先用 Codex 或 Claude Code 開啟要導入 xui 的專案根目錄，再貼上。
+完整步驟見 [Agent 安裝流程](doc/runbooks/agent-install.md)。
 
 ```text
 請替目前專案安全地安裝 xui，來源是 https://github.com/moxamax/xui-public.git
-請依 xui 的 Agent 安裝流程 (doc/runbooks/agent-install.md) 安裝最新正式版
-先檢查環境，不符合就停下並告訴我缺什麼
+先從來源 repo 讀取 doc/runbooks/agent-install.md；無法讀取就停止
+依該流程先檢查環境，不符合就停止並告訴我缺什麼，再安裝最新公開版本
 ```
 
 ## 平常使用

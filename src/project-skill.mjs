@@ -66,6 +66,8 @@ Codex 只會在專案為 trusted 時載入 project-local \`.codex/hooks.json\`�
 
 實作後先重新對照本次使用元件的相關上游指引，修正已知偏離，再執行 \`node ./node_modules/xui/bin/xui.mjs check\`。診斷並修正所有錯誤後重跑。該檢查回報的 consumer 錯誤即使早於本次工作就已存在，也必須修正；不得以「既有問題」略過，也不得建立 baseline 或 suppression。
 
+型別檢查遇到 React 19 的 \`@dnd-kit/core\`／\`JSX\` 錯誤時，先讀 [上游資料判準](../../../node_modules/xui/doc/reference/upstream-guidance.md#react-19-的頂層-import)，依適用配對處理再重跑。
+
 檢查全綠後，再次重新對照相關上游指引。若因此修改程式，必須再跑 \`node ./node_modules/xui/bin/xui.mjs check\`。重複到沒有已知偏離且靜態契約全綠；若有無法自行排除的外部 blocker，清楚說明原因與未完成項目。
 
 ## 交付
