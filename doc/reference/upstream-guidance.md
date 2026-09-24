@@ -18,10 +18,16 @@ Reference hashes 只證明複本與安裝套件一致，不證明文件語意正
 觸發條件：React 19 的型別檢查出現 `@dnd-kit/core` 的全域 `JSX` 錯誤
 （例如 `Cannot find namespace 'JSX'`）。
 
-適用配對：xui release 指定的 `@qijenchen/design-system@0.1.0-beta.131`，
-搭配 React 19 型別並執行完整 library typecheck。此配對的頂層 import 會引入上述
-錯誤，即使 consumer 只使用 Button。其他配對須先核對實際安裝套件，不直接套用本修法。
+適用配對：xui release 指定的 `@qijenchen/design-system@0.1.0-beta.145`，
+搭配 React 19 型別並執行完整 library typecheck（`strict: true`、
+`skipLibCheck: false`）。此配對的頂層 import 仍會引入上述錯誤，即使 consumer
+只使用 Button；改用公開的 `components/Button` 子路徑則可通過。其他配對須先核對
+實際安裝套件，不直接套用本修法。
 遇到此情況，改用 package exports 支援的 `components/Button`、`components/Tooltip`
 等元件子路徑，再執行 consumer typecheck；保留原有檢查設定。
 
 這只能避開未使用元件引入的型別問題；若所需元件本身仍引入錯誤，回報 blocker。
+
+此配對的 `llms.txt`、`llms-full.txt` 頁首仍寫 `beta.132`；實際套件的
+`package.json` 為 `0.1.0-beta.145`。保留文件原文，依上面的判準核對用法，
+不把頁首當作套件版本。
